@@ -2,7 +2,7 @@
   <h1>Language converter</h1>
   <div>
     <div class="col-md-6">
-      <language-editor language="js"></language-editor>
+      <language-editor :active="true" language="js"></language-editor>
     </div>
     <div class="col-md-6">
       <language-editor language="php"></language-editor>
