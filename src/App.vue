@@ -1,11 +1,13 @@
 <template>
-  <h1>Language converter</h1>
   <div>
-    <div class="col-md-6">
-      <language-editor :active="true" language="js"></language-editor>
-    </div>
-    <div class="col-md-6">
-      <language-editor language="php"></language-editor>
+    <h1>Language converter</h1>
+    <div>
+      <div v-for="(languageKey, code) in codes">
+        <div class="col-md-6">
+          <language-editor :active="active === languageKey" :language="languageKey"
+            :active-code="codes[active]" :code.sync="code"></language-editor>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -13,10 +15,26 @@
 <script>
 import LanguageEditor from './components/LanguageEditor'
 
+const state = {
+  active: 'js',
+  codes: {
+    js: '',
+    php: ''
+  }
+}
+
 /** @class App */
 export default {
   components: {
     LanguageEditor
+  },
+  data () {
+    return state
+  },
+  computed: {
+    php () {
+      return state.codes.js
+    }
   }
 }
 </script>
@@ -30,21 +48,8 @@ body {
   height: 100%;
 }
 
-#app {
-  color: #2c3e50;
-  margin-top: -100px;
-  max-width: 600px;
-  font-family: Source Sans Pro, Helvetica, sans-serif;
-  text-align: center;
-}
-
 #app a {
   color: #42b983;
   text-decoration: none;
-}
-
-.logo {
-  width: 100px;
-  height: 100px
 }
 </style>
